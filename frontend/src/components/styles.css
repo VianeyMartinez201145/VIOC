@@ -1,0 +1,40 @@
+.footer {
+    background-color: #000000; /* Cambia el color de fondo según tus preferencias */
+    color: white; /* Cambia el color del texto según tus preferencias */
+    padding: 20px; /* Ajusta el relleno según tus preferencias */
+}
+.carrousel {
+    background-color: #eb9fb1;
+}
+.navbar-dark .navbar-nav .nav-link {
+  color: rgb(0 0 0);
+}
+.navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link {
+  color: #000;
+} 
+.navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .nav-link:hover {
+  color: #ce326e;
+}
+.bg-white {
+  background-color: rgb(242, 242, 242) !important;
+}
+.carousel img {
+  display: block;
+  height: 300px;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body {
+  margin: 0;
+  font-family: "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: .875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #000000;
+  text-align: left;
+  background-color: #fff;
+}
