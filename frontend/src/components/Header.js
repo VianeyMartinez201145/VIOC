@@ -4,7 +4,7 @@ import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import SearchBox from "./SearchBox";
 import { logout } from "../actions/userActions";
-import {} from "../actions/productActions";
+import { listProducts } from "../actions/productActions";
 import logo from "./logo.png";
 import "./styles.css";
 
@@ -94,11 +94,7 @@ function Header() {
                   <i></i>
                 </Nav.Link>
               </LinkContainer>
-              <LinkContainer to="/login">
-                <Nav.Link>
-                  <i></i>
-                </Nav.Link>
-              </LinkContainer>
+
               <LinkContainer to="/cart">
                 <Nav.Link>
                   <i className="fas fa-shopping-cart"></i>Carrito

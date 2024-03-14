@@ -1,37 +1,29 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import React from "react";
 import { Carousel, Image } from "react-bootstrap";
-import Loader from "./Loader";
-import Message from "./Message";
-import { listTopProducts } from "../actions/productActions";
+import imagen1 from "./imagen1.png";
+import imagen2 from "./imagen2.png";
 
 function ProductCarousel() {
-  const dispatch = useDispatch();
+  // Array de productos estáticos
+  const products = [
+    {
+      name: "Producto 1",
+      price: 10.99,
+      image: imagen1,
+    },
+    {
+      name: "Producto 2",
+      price: 19.99,
+      image: imagen2,
+    },
+  ];
 
-  const productTopRated = useSelector((state) => state.productTopRated);
-  const { error, loading, products } = productTopRated;
-
-  useEffect(() => {
-    dispatch(listTopProducts());
-  }, [dispatch]);
-
-  return loading ? (
-    <Loader />
-  ) : error ? (
-    <Message variant="danger">{error}</Message>
-  ) : (
-    <Carousel pause="hover" className="carrousel">
-      {products.map((product) => (
-        <Carousel.Item key={product._id}>
-          <Link to={`/product/${product._id}`}>
-            <Image src={product.image_url} alt={product.name} fluid />
-            <Carousel.Caption className="carousel.caption">
-              <h4>
-                {product.name} (${product.price})
-              </h4>
-            </Carousel.Caption>
-          </Link>
+  return (
+    <Carousel pause="hover" className="carousel">
+      {products.map((product, index) => (
+        <Carousel.Item key={index}>
+          <Image src={product.image} alt={product.name} fluid />
+          <Carousel.Caption className="carousel-caption"></Carousel.Caption>
         </Carousel.Item>
       ))}
     </Carousel>

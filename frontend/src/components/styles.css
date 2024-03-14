@@ -18,14 +18,20 @@
 .bg-white {
   background-color: rgb(242, 242, 242) !important;
 }
+.container {
+  padding-left: 0px;
+  padding-right: 0px;
+  max-width: 1200px; /* Ancho máximo del contenedor */
+  margin: 0 auto; /* Centrar el contenedor horizontalmente */
+}
+
 .carousel img {
   display: block;
-  height: 300px;
-  padding: 20px;
-  margin: 20px;
-  border-radius: 50%;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%; /* Establece el ancho de la imagen al 100% del contenedor */
+  height: auto; /* Altura automática para mantener la proporción de aspecto */
+  padding: 0;
+  margin: 0; /* Elimina el margen */
+  border-radius: 0; /* Elimina cualquier borde redondeado */
 }
 
 body {
@@ -37,4 +43,9 @@ body {
   color: #000000;
   text-align: left;
   background-color: #fff;
+}
+.img-fluid {
+  width: 40%;
+  height: auto;
+  align: center;
 }

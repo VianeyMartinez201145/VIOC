@@ -15,3 +15,15 @@ class UserAdmin(ImportExportModelAdmin):
 admin.site.unregister(User)  # Desregistra el modelo User de auth.UserAdmin
 admin.site.register(User, UserAdmin)  # Registra el modelo User con tu propia configuración en el admin
 
+class ProductAdmin(ImportExportModelAdmin):
+    list_display = ('name',	'brand', 'category', 'description',	'rating', 'numReviews', 'price', 'createdAt',	'_id', 'user_id', 'image', 'image_url',	'countInStock')
+
+admin.site.unregister(Product)
+admin.site.register(Product, ProductAdmin) 
+
+class ReviewAdmin(ImportExportModelAdmin):
+    list_display = ('name',	'rating', 'comment', '_id', 'product_id', 'user_id', 'createdAt')
+
+admin.site.unregister(Review)
+admin.site.register(Review, ReviewAdmin) 
+

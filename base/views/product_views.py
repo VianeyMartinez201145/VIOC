@@ -122,11 +122,11 @@ def createProductReview(request, pk):
 
     alreadyExists = product.review_set.filter(user=user).exists()
     if alreadyExists:
-        content = {'detail': 'Product already reviewed'}
+        content = {'detail': 'El producto ya ha sido calificado'}
         return Response(content, status=status.HTTP_400_BAD_REQUEST)
 
     elif data['rating'] == 0:
-        content = {'detail': 'Please select a rating'}
+        content = {'detail': 'Por favor selecciona una calificación'}
         return Response(content, status=status.HTTP_400_BAD_REQUEST)
 
     else:
@@ -148,7 +148,7 @@ def createProductReview(request, pk):
         product.rating = total / len(reviews)
         product.save()
 
-        return Response('Review Added')
+        return Response('Reseña añadida')
 def getDataAPI(request):
     response = requests.get('https://makeup-api.herokuapp.com/api/v1/products.json')
     data = response.json()
@@ -168,3 +168,5 @@ def getDataAPI(request):
         newdata.save()
 
     return render(request, 'exito.html')
+
+Product.objects.all().update(countInStock=30)
