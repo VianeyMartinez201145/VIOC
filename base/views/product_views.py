@@ -56,6 +56,7 @@ def getProduct(request, pk):
     serializer = ProductSerializer(product, many=False)
     return Response(serializer.data)
 
+#Categorias ----------------------------------------------------------------
 @api_view(['GET'])
 def getOtros(request):
     category = request.query_params.get('category', 'otros', )  # Obtener el parámetro 'category' de la consulta
@@ -176,6 +177,7 @@ def getGel(request):
     serializer = ProductSerializer(products, many=True)
     return Response(serializer.data)
 
+#Marcas ----------------------------------------------------------------
 @api_view(['GET'])
 def getNYX(request):
     brand = request.query_params.get('brand', 'nyx', )  
@@ -184,6 +186,71 @@ def getNYX(request):
     serializer = ProductSerializer(products, many=True)
     return Response(serializer.data)
 
+@api_view(['GET'])
+def getRevlon(request):
+    brand = request.query_params.get('brand', 'revlon', )  
+    products = Product.objects.filter(brand=brand) 
+
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getBenefit(request):
+    brand = request.query_params.get('brand', 'benefit', )  
+    products = Product.objects.filter(brand=brand) 
+
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getClinique(request):
+    brand = request.query_params.get('brand', 'clinique', )  
+    products = Product.objects.filter(brand=brand) 
+
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getFenty(request):
+    brand = request.query_params.get('brand', 'fenty', )  
+    products = Product.objects.filter(brand=brand) 
+
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getDior(request):
+    brand = request.query_params.get('brand', 'dior', )  
+    products = Product.objects.filter(brand=brand) 
+
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getMaybelline(request):
+    brand = request.query_params.get('brand', 'maybelline', )  
+    products = Product.objects.filter(brand=brand) 
+
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getELF(request):
+    brand = request.query_params.get('brand', 'e.l.f.', )  
+    products = Product.objects.filter(brand=brand) 
+
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getLoreal(request):
+    brand = request.query_params.get('brand', "l'oreal", )  
+    products = Product.objects.filter(brand=brand) 
+
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
+
+# ----------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes([IsAdminUser])  
 def createProduct(request):

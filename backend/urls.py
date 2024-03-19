@@ -17,23 +17,33 @@ urlpatterns = [
     path('getDataOAPI/', getDataOAPI, name='obtener_datosO'),
 
     #Category:
-    path('api/category/otros/', include('base.urls.otros')),
-    path('api/category/lipstick/', include('base.urls.lipstick')),
-    path('api/category/liquid/', include('base.urls.categoryp')),
-    path('api/category/pencil/', include('base.urls.pencil')),
-    path('api/category/powder/', include('base.urls.powder')),
-    path('api/category/palette/', include('base.urls.palette')),
-    path('api/category/cream/', include('base.urls.cream')),
-    path('api/category/mineral/', include('base.urls.mineral')),
-    path('api/category/lipStain/', include('base.urls.lipStain')),
-    path('api/category/bbcc/', include('base.urls.bbcc')),
-    path('api/category/lipGloss/', include('base.urls.lipGloss')),
-    path('api/category/concealer/', include('base.urls.concealer')),
-    path('api/category/highlighter/', include('base.urls.highlighter')),
-    path('api/category/contour/', include('base.urls.contour')),
-    path('api/category/gel/', include('base.urls.gel')),
+    path('api/category/otros/', include('base.urls.categorias.otros')),
+    path('api/category/lipstick/', include('base.urls.categorias.lipstick')),
+    path('api/category/liquid/', include('base.urls.categorias.categoryp')),
+    path('api/category/pencil/', include('base.urls.categorias.pencil')),
+    path('api/category/powder/', include('base.urls.categorias.powder')),
+    path('api/category/palette/', include('base.urls.categorias.palette')),
+    path('api/category/cream/', include('base.urls.categorias.cream')),
+    path('api/category/mineral/', include('base.urls.categorias.mineral')),
+    path('api/category/lipStain/', include('base.urls.categorias.lipStain')),
+    path('api/category/bbcc/', include('base.urls.categorias.bbcc')),
+    path('api/category/lipGloss/', include('base.urls.categorias.lipGloss')),
+    path('api/category/concealer/', include('base.urls.categorias.concealer')),
+    path('api/category/highlighter/', include('base.urls.categorias.highlighter')),
+    path('api/category/contour/', include('base.urls.categorias.contour')),
+    path('api/category/gel/', include('base.urls.categorias.gel')),
 
     #Marcas:
+    path('api/marcas/nyx', include('base.urls.marcas.nyx')),
+    path('api/marcas/revlon', include('base.urls.marcas.revlon')),
+    path('api/marcas/benefit', include('base.urls.marcas.benefit')),
+    path('api/marcas/clinique', include('base.urls.marcas.clinique')),
+    path('api/marcas/fenty', include('base.urls.marcas.fenty')),
+    path('api/marcas/dior', include('base.urls.marcas.dior')),
+    path('api/marcas/maybelline', include('base.urls.marcas.maybelline')),
+    path('api/marcas/elf', include('base.urls.marcas.elf')),
+    path('api/marcas/loreal', include('base.urls.marcas.loreal')),
+    
 
 ]
 
