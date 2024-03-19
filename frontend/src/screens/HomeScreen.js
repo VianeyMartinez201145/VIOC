@@ -1,14 +1,13 @@
-// HomeScreen.js
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Form } from "react-bootstrap";
 import Product from "../components/Product";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import Paginate from "../components/Paginate";
 import ProductCarousel from "../components/ProductCarousel";
-import imagen1 from "./imagen1.png";
 import { listProducts } from "../actions/productActions";
+import imagen1 from "./imagen1.png";
 import "./styles.css";
 
 function HomeScreen({ history }) {
@@ -22,10 +21,6 @@ function HomeScreen({ history }) {
   useEffect(() => {
     dispatch(listProducts(keyword, category));
   }, [dispatch, keyword, category]);
-
-  const handleCategoryChange = (e) => {
-    setCategory(e.target.value);
-  };
 
   return (
     <div>
@@ -48,11 +43,6 @@ function HomeScreen({ history }) {
               </Col>
             ))}
           </Row>
-          <img
-            src={imagen1}
-            alt="Imagen 1"
-            style={{ width: "100%", display: "block" }}
-          />
           <br />
           <br />
           <br />

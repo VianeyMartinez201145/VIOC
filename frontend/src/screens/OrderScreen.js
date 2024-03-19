@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
+import { Button, Row, Col, ListGroup, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { PayPalButton } from "react-paypal-button-v2";
@@ -141,15 +141,6 @@ function OrderScreen({ match, history }) {
                   {order.orderItems.map((item, index) => (
                     <ListGroup.Item key={index}>
                       <Row>
-                        <Col md={1}>
-                          <Image
-                            src={item.image_url}
-                            alt={item.name}
-                            fluid
-                            rounded
-                          />
-                        </Col>
-
                         <Col>
                           <Link to={`/product/${item.product}`}>
                             {item.name}
@@ -158,7 +149,7 @@ function OrderScreen({ match, history }) {
 
                         <Col md={4}>
                           {item.qty} X ${item.price} = $
-                          {(item.qty * item.price).toFixed(2)}
+                          {(item.qty * item.price).toFixed(2)} USD
                         </Col>
                       </Row>
                     </ListGroup.Item>
@@ -179,21 +170,21 @@ function OrderScreen({ match, history }) {
               <ListGroup.Item>
                 <Row>
                   <Col>Productos:</Col>
-                  <Col>${order.itemsPrice}</Col>
+                  <Col>${order.itemsPrice} USD</Col>
                 </Row>
               </ListGroup.Item>
 
               <ListGroup.Item>
                 <Row>
                   <Col>Envio:</Col>
-                  <Col>${order.shippingPrice}</Col>
+                  <Col>${order.shippingPrice} USD</Col>
                 </Row>
               </ListGroup.Item>
 
               <ListGroup.Item>
                 <Row>
                   <Col>Total:</Col>
-                  <Col>${order.totalPrice}</Col>
+                  <Col>${order.totalPrice} USD</Col>
                 </Row>
               </ListGroup.Item>
 

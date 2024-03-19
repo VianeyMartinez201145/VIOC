@@ -1,17 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Row,
-  Col,
-  ListGroup,
-  Image,
-  img,
-  Form,
-  Button,
-  Card,
-  Image_url,
-} from "react-bootstrap";
+import { Row, Col, ListGroup, Form, Button, Card } from "react-bootstrap";
 import Message from "../components/Message";
 import { addToCart, removeFromCart } from "../actions/cartActions";
 
@@ -62,7 +52,7 @@ function CartScreen({ match, location, history }) {
                     <Link to={`/product/${item.product}`}>{item.name}</Link>
                   </Col>
 
-                  <Col md={2}>${item.price}</Col>
+                  <Col md={2}>${item.price} USD</Col>
 
                   <Col md={3}>
                     <Form.Control
@@ -108,7 +98,8 @@ function CartScreen({ match, location, history }) {
               $
               {cartItems
                 .reduce((acc, item) => acc + item.qty * item.price, 0)
-                .toFixed(2)}
+                .toFixed(2)}{" "}
+              USD
             </ListGroup.Item>
           </ListGroup>
 

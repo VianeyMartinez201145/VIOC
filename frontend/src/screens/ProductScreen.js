@@ -16,9 +16,11 @@ import Message from "../components/Message";
 import {
   listProductDetails,
   createProductReview,
+  deleteProduct,
 } from "../actions/productActions";
 import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
 import "./styles.css";
+
 function ProductScreen({ match, history }) {
   const [qty, setQty] = useState(1);
   const [rating, setRating] = useState(0);
@@ -39,6 +41,17 @@ function ProductScreen({ match, history }) {
     success: successProductReview,
   } = productReviewCreate;
 
+  const productDelete = useSelector((state) => state.productDelete);
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = productDelete;
+
+  const handleRegresar = () => {
+    history.goBack();
+  };
+
   useEffect(() => {
     if (successProductReview) {
       setRating(0);
@@ -51,6 +64,11 @@ function ProductScreen({ match, history }) {
 
   const addToCartHandler = () => {
     history.push(`/cart/${match.params.id}?qty=${qty}`);
+  };
+  const deleteHandler = (id) => {
+    if (window.confirm("¿Estas seguro de querer eliminar el producto?")) {
+      dispatch(deleteProduct(id));
+    }
   };
 
   const submitHandler = (e) => {
@@ -65,9 +83,10 @@ function ProductScreen({ match, history }) {
 
   return (
     <div>
-      <Link to="/" className="btn btn-light my-3">
+      <button onClick={handleRegresar} className="btn btn-light my-3">
         Regresar
-      </Link>
+      </button>
+
       {loading ? (
         <Loader />
       ) : error ? (
@@ -75,8 +94,19 @@ function ProductScreen({ match, history }) {
       ) : (
         <div>
           <Row className="p">
-            <Col md={6}>
-              <Image src={product.image_url} alt={product.name} fluid />
+            <Col md={4}>
+              <Image
+                className="img-fluid"
+                src={product.image_url}
+                alt={product.name}
+                fluid
+                style={{
+                  width: "240px",
+                  height: "240px",
+                  display: "block",
+                  margin: "20px",
+                }}
+              />
             </Col>
 
             <Col md={7}>
@@ -84,7 +114,8 @@ function ProductScreen({ match, history }) {
                 <ListGroup.Item>
                   <h3>{product.name}</h3>
                 </ListGroup.Item>
-
+                <ListGroup.Item>Categoria: {product.category}</ListGroup.Item>
+                <ListGroup.Item>Marca: {product.brand}</ListGroup.Item>
                 <ListGroup.Item>
                   <Rating
                     value={product.rating}
@@ -93,15 +124,13 @@ function ProductScreen({ match, history }) {
                   />
                 </ListGroup.Item>
 
-                <ListGroup.Item>Precio: ${product.price} </ListGroup.Item>
-
                 <ListGroup.Item>
                   Descripción: {product.description}
                 </ListGroup.Item>
               </ListGroup>
             </Col>
 
-            <Col md={5}>
+            <Col md={3}>
               <Card>
                 <ListGroup variant="flush">
                   <ListGroup.Item>
@@ -155,6 +184,15 @@ function ProductScreen({ match, history }) {
                     >
                       Añadir al carrito
                     </Button>
+                    {userInfo && userInfo.isAdmin && (
+                      <Button
+                        variant="danger"
+                        className="btn-block"
+                        onClick={() => deleteHandler(product._id)}
+                      >
+                        <i className="fas fa-trash"></i>
+                      </Button>
+                    )}
                   </ListGroup.Item>
                 </ListGroup>
               </Card>
@@ -162,7 +200,7 @@ function ProductScreen({ match, history }) {
           </Row>
 
           <Row>
-            <Col md={5}>
+            <Col md={6} style={{ marginTop: "90px" }}>
               <h4>Reseñas</h4>
               {product.reviews.length === 0 && (
                 <Message variant="info">No hay reseñas</Message>
@@ -177,7 +215,10 @@ function ProductScreen({ match, history }) {
                     <p>{review.comment}</p>
                   </ListGroup.Item>
                 ))}
-
+              </ListGroup>
+            </Col>
+            <Col md={6} style={{ marginTop: "80px" }}>
+              <ListGroup>
                 <ListGroup.Item>
                   <h4>Escribe un comentario</h4>
 

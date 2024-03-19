@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import *
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
+from rest_framework import  viewsets
 
 admin.site.register(Product)
 admin.site.register(Review)
@@ -16,7 +17,7 @@ admin.site.unregister(User)  # Desregistra el modelo User de auth.UserAdmin
 admin.site.register(User, UserAdmin)  # Registra el modelo User con tu propia configuración en el admin
 
 class ProductAdmin(ImportExportModelAdmin):
-    list_display = ('name',	'brand', 'category', 'description',	'rating', 'numReviews', 'price', 'createdAt',	'_id', 'user_id', 'image', 'image_url',	'countInStock')
+    list_display = ('name',	'brand', 'category', 'description',	'rating', 'numReviews', 'price', 'createdAt',	'_id', 'user_id', 'image', 'image_url')
 
 admin.site.unregister(Product)
 admin.site.register(Product, ProductAdmin) 
@@ -26,4 +27,6 @@ class ReviewAdmin(ImportExportModelAdmin):
 
 admin.site.unregister(Review)
 admin.site.register(Review, ReviewAdmin) 
+
+
 

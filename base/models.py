@@ -24,6 +24,15 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+    
+    @classmethod
+    def actualizar_categorias(cls):
+        # Filtra los productos con la categoría NULL y actualiza su categoría a 'otros'
+        cls.objects.filter(category__isnull=True).update(category='otros')
+
+    @classmethod
+    def actualizar_precio(cls):
+        cls.objects.filter(price=0).update(price='14.99')
 
     def save(self, *args, **kwargs):
         if self.image_url and not self.image:

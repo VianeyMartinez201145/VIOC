@@ -1,12 +1,12 @@
 from django.urls import path
 from base.views import product_views as views
-from base.views.product_views import getDataAPI
+from base.views.product_views import getDataAPI, getCategory
 from base.views.order_views import getDataOAPI
 
 urlpatterns = [
 
     path('', views.getProducts, name="products"),
-
+    
     path('create/', views.createProduct, name="product-create"),
     path('upload/', views.uploadImage, name="image-upload"),
 

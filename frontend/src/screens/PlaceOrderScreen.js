@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,7 +18,7 @@ function PlaceOrderScreen({ history }) {
   cart.itemsPrice = cart.cartItems
     .reduce((acc, item) => acc + item.price * item.qty, 0)
     .toFixed(2);
-  cart.shippingPrice = (cart.itemsPrice > 100 ? 0 : 10).toFixed(2);
+  cart.shippingPrice = (cart.itemsPrice > 100 ? 0 : 5).toFixed(2);
   cart.taxPrice = Number(0.082 * cart.itemsPrice).toFixed(2);
 
   cart.totalPrice = (
@@ -85,10 +85,11 @@ function PlaceOrderScreen({ history }) {
                       <Row>
                         <Col md={1}>
                           <Image
-                            src={item.image}
+                            src={item.image_url}
                             alt={item.name}
                             fluid
                             rounded
+                            style={{ width: "30px", height: "30px" }} // Establece el ancho y el alto de la imagen
                           />
                         </Col>
 
@@ -100,7 +101,7 @@ function PlaceOrderScreen({ history }) {
 
                         <Col md={4}>
                           {item.qty} X ${item.price} = $
-                          {(item.qty * item.price).toFixed(2)}
+                          {(item.qty * item.price).toFixed(2)} USD
                         </Col>
                       </Row>
                     </ListGroup.Item>
@@ -121,28 +122,21 @@ function PlaceOrderScreen({ history }) {
               <ListGroup.Item>
                 <Row>
                   <Col>Productos:</Col>
-                  <Col>${cart.itemsPrice}</Col>
+                  <Col>${cart.itemsPrice} USD</Col>
                 </Row>
               </ListGroup.Item>
 
               <ListGroup.Item>
                 <Row>
                   <Col>Envio:</Col>
-                  <Col>${cart.shippingPrice}</Col>
-                </Row>
-              </ListGroup.Item>
-
-              <ListGroup.Item>
-                <Row>
-                  <Col>Impuestos:</Col>
-                  <Col>${cart.taxPrice}</Col>
+                  <Col>${cart.shippingPrice} USD</Col>
                 </Row>
               </ListGroup.Item>
 
               <ListGroup.Item>
                 <Row>
                   <Col>Total:</Col>
-                  <Col>${cart.totalPrice}</Col>
+                  <Col>${cart.totalPrice} USD</Col>
                 </Row>
               </ListGroup.Item>
 

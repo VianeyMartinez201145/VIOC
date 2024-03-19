@@ -1,5 +1,7 @@
 from django.shortcuts import render
 import requests
+import random
+from rest_framework import serializers, viewsets
 
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
@@ -9,20 +11,23 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from base.models import Product, Review
 from base.serializers import ProductSerializer
 
-from rest_framework import status
+from rest_framework import status, viewsets, generics
+from django_filters.rest_framework import DjangoFilterBackend
+from ..filters import ProductFilter  # Importa tu filtro personalizado
 
 
 @api_view(['GET'])
 def getProducts(request):
-    query = request.query_params.get('keyword')
-    if query == None:
-        query = ''
+    query = request.query_params.get('keyword', '')
 
-    products = Product.objects.filter(
-        name__icontains=query).order_by('-createdAt')
+    products = Product.objects.filter(name__icontains=query).order_by('-createdAt')
+
+    # Mezclar los productos
+    shuffled_products = list(products)
+    random.shuffle(shuffled_products)
 
     page = request.query_params.get('page')
-    paginator = Paginator(products, 5)
+    paginator = Paginator(shuffled_products, 8)
 
     try:
         products = paginator.page(page)
@@ -31,11 +36,10 @@ def getProducts(request):
     except EmptyPage:
         products = paginator.page(paginator.num_pages)
 
-    if page == None:
+    if page is None:
         page = 1
 
     page = int(page)
-    print('Page:', page)
     serializer = ProductSerializer(products, many=True)
     return Response({'products': serializer.data, 'page': page, 'pages': paginator.num_pages})
 
@@ -46,16 +50,142 @@ def getTopProducts(request):
     serializer = ProductSerializer(products, many=True)
     return Response(serializer.data)
 
-
 @api_view(['GET'])
 def getProduct(request, pk):
     product = Product.objects.get(_id=pk)
     serializer = ProductSerializer(product, many=False)
     return Response(serializer.data)
 
+@api_view(['GET'])
+def getOtros(request):
+    category = request.query_params.get('category', 'otros', )  # Obtener el parámetro 'category' de la consulta
+    products = Product.objects.filter(category=category)  # Filtrar los productos por la categoría proporcionada
+
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getLipstick(request):
+    category = request.query_params.get('category', 'lipstick', )
+    products = Product.objects.filter(category=category)
+
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getCategory(request):
+    category = request.query_params.get('category', 'liquid', )
+    products = Product.objects.filter(category=category)
+
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getPencil(request):
+    category = request.query_params.get('category', 'pencil', )
+    products = Product.objects.filter(category=category)
+
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getPowder(request):
+    category = request.query_params.get('category', 'powder', )
+    products = Product.objects.filter(category=category)
+
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getPalette(request):
+    category = request.query_params.get('category', 'palette', )
+    products = Product.objects.filter(category=category)
+
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getCream(request):
+    category = request.query_params.get('category', 'cream', )
+    products = Product.objects.filter(category=category)
+
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getMineral(request):
+    category = request.query_params.get('category', 'mineral', ) 
+    products = Product.objects.filter(category=category) 
+
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getLipStain(request):
+    category = request.query_params.get('category', 'lip_stain', )
+    products = Product.objects.filter(category=category)
+
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getBBCC(request):
+    category = request.query_params.get('category', 'bb_cc', ) 
+    products = Product.objects.filter(category=category)
+
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getLipGloss(request):
+    category = request.query_params.get('category', 'lip_gloss', )
+    products = Product.objects.filter(category=category)
+
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getConcealer(request):
+    category = request.query_params.get('category', 'concealer', )
+    products = Product.objects.filter(category=category)
+
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getHighlighter(request):
+    category = request.query_params.get('category', 'highlighter', ) 
+    products = Product.objects.filter(category=category) 
+
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getContour(request):
+    category = request.query_params.get('category', 'contour', )  
+    products = Product.objects.filter(category=category)  
+
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getGel(request):
+    category = request.query_params.get('category', 'gel', )  
+    products = Product.objects.filter(category=category) 
+
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getNYX(request):
+    brand = request.query_params.get('brand', 'nyx', )  
+    products = Product.objects.filter(brand=brand) 
+
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
 
 @api_view(['POST'])
-@permission_classes([IsAdminUser])
+@permission_classes([IsAdminUser])  
 def createProduct(request):
     user = request.user
 
@@ -117,7 +247,7 @@ def uploadImage(request):
 @permission_classes([IsAuthenticated])
 def createProductReview(request, pk):
     user = request.user
-    product = Product.objects.get(_id=pk)
+    product = Product.objects.get(id=pk)
     data = request.data
 
     alreadyExists = product.review_set.filter(user=user).exists()
@@ -169,4 +299,7 @@ def getDataAPI(request):
 
     return render(request, 'exito.html')
 
+
+   
 Product.objects.all().update(countInStock=30)
+Product.actualizar_categorias()

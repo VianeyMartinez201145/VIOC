@@ -1,7 +1,17 @@
 .r{
     color: #be0043;
 }
-.products{
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: .75rem 1.25rem;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.493);
+}
+.div{
+    display:flex;
+}
+.card {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -9,19 +19,8 @@
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
-    height: 50 px;
+    border: 1px solid rgb(0 0 0 / 13%);
 }
-.h {
-    display: flex;
-    flex-wrap: nowrap;
-    margin-right: -15px;
-    margin-left: -15px;
-    justify-content: center;
-}
-.div{
-    display:flex;
-}
-
 .p {
     display: flex;
     margin-right: -15px;
